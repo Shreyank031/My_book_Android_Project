@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var frameWorkLayout: FrameLayout
     lateinit var navigationView: NavigationView
+    var previousMenueItem: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,46 +33,68 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setToolbar()
 
+        openDashboardAsDefault() //To open Dashboard as default. The fun is declared in later part of the code
+
         val actionBarDrawerLayout = ActionBarDrawerToggle(
             this@MainActivity,
             drawerLayout,// which helps the navigation layout slide in and slide out
             R.string.open_drawer,
             R.string.close_drawer
+
         )
         drawerLayout.addDrawerListener(actionBarDrawerLayout) // We have made ham functional but not home button. So id doesn't work yet
         actionBarDrawerLayout.syncState() // ham to back arrow and vice-versa
 
         // Adding listener to navigationView items
         navigationView.setNavigationItemSelectedListener {
+
+           if (previousMenueItem != null) {
+               previousMenueItem?.isChecked = false
+           }
+            it.isCheckable = true
+            it.isChecked = true
+            previousMenueItem = it
+
             when (it.itemId) { // it is a boolean
                 R.id.dashboard -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, DashboardFragments())
-                        .commit()//This commits the transaction. Calling commit() applies the changes made by the transaction. It's important to call commit() after making changes to ensure that the changes take effect.
-                    drawerLayout.closeDrawers() //This method closes any open drawers associated with the DrawerLayout. It's often called after a navigation action to close the drawer if it was open.
+                    openDashboardAsDefault() // Same thing as below but declared a fun for it. looks more organized
+//                    supportFragmentManager.beginTransaction()
+//                        .replace(R.id.frameLayout, DashboardFragments())
+//                       // .addToBackStack("Dashboard")
+//                        .commit()//This commits the transaction. Calling commit() applies the changes made by the transaction. It's important to call commit() after making changes to ensure that the changes take effect.
+//                    drawerLayout.closeDrawers() //This method closes any open drawers associated with the DrawerLayout. It's often called after a navigation action to close the drawer if it was open.
+//                    supportActionBar?.title="Dashboard"
 
                 }
 
+
                 R.id.profile -> {
-                   supportFragmentManager.beginTransaction()
-                       .replace(R.id.frameLayout,ProfileFragment())
-                       .commit()
-                   drawerLayout.closeDrawers()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, ProfileFragment())
+                        // .addToBackStack("Profile")  Because we are making use of onBackPressed() inbuilt function
+                        .commit()
+                    drawerLayout.closeDrawers()
+                    supportActionBar?.title = "Profile"
 
                 }
 
                 R.id.favourites -> {
-                   supportFragmentManager.beginTransaction()
-                       .replace(R.id.frameLayout,FavouriteFragment())
-                       .commit()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, FavouriteFragment())
+                        // .addToBackStack("Favourites")
+                        .commit()
                     drawerLayout.closeDrawers()
+                    supportActionBar?.title = "Favourites"
                 }
 
                 R.id.about -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, AboutFragment())
+                        // .addToBackStack("About")
                         .commit()
+                    supportActionBar?.title = "About"
                     drawerLayout.closeDrawers()
+
 
                 }
             }
@@ -86,6 +109,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Title"
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     //To add the click listeners to the actionBar in order to make home button on action bar functional.
@@ -97,6 +121,26 @@ class MainActivity : AppCompatActivity() {
             // specifies that the drawer should open from the start edge (left edge in left-to-right languages, right edge in right-to-left languages) of the layout.
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //Call this fun inside onCreate method to open Dashboard as default i.e whenever you open the app
+    fun openDashboardAsDefault() {
+        val D_fragment = DashboardFragments()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, D_fragment)
+        transaction.commit()
+        supportActionBar?.title = "Dashboard"
+        navigationView.setCheckedItem(R.id.dashboard)
+        drawerLayout.closeDrawers()
+    }
+
+    override fun onBackPressed() { //To change the back button functionality
+        val frag = supportFragmentManager.findFragmentById(R.id.frameLayout) // Grabs the fragments that is currently displayed in the frameLayout/frame
+        when (frag) {
+            //When the frame has any other fragment apart from DashboardFragment, then open dashboardFragment when back button is pressed
+            !is DashboardFragments -> openDashboardAsDefault()
+            else -> super.onBackPressed() //else back button functions as default behaviour i.e exits the app
+        }
     }
 
 
