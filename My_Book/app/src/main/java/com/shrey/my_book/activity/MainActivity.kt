@@ -1,11 +1,9 @@
-package com.shrey.my_book
+package com.shrey.my_book.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.drawerlayout.widget.DrawerLayout
@@ -13,6 +11,11 @@ import com.google.android.material.navigation.NavigationView
 //import android.widget.Toolbar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import com.shrey.my_book.fragments.AboutFragment
+import com.shrey.my_book.fragments.DashboardFragments
+import com.shrey.my_book.fragments.FavouriteFragment
+import com.shrey.my_book.fragments.ProfileFragment
+import com.shrey.my_book.R
 
 class MainActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
