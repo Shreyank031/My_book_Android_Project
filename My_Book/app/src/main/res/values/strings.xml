@@ -14,4 +14,8 @@
     <string name="profile_fragment">Profile Fragment</string>
     <string name="fragment_about">Fragment About</string>
     <string name="list_items">List Items</string>
+    <string name="name_of_the_author">Name of the Author</string>
+    <string name="rs_250">Rs 250</string>
+    <string name="reviews">Reviews</string>
+    <string name="booklogo">BookLogo</string>
 </resources>

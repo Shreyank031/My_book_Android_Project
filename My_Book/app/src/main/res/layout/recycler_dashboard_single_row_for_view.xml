@@ -3,16 +3,76 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtRecyclerRowItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/list_items"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:layout_margin="5dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        />
+    <ImageView
+        android:id="@+id/imgAndy"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:padding="5dp"
+        android:src="@drawable/andy"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/booklogo" />
 
+
+    <TextView
+        android:id="@+id/txtBookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgAndy"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:text="@string/list_items"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtNameOfAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgAndy"
+        android:layout_below="@+id/txtBookName"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:textSize="11sp"
+        android:text="@string/name_of_the_author"
+
+        />
+    <TextView
+        android:id="@+id/txtBookPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgAndy"
+        android:layout_below="@id/txtNameOfAuthor"
+        android:text="@string/rs_250"
+        android:layout_marginLeft="5dp"
+        android:textSize="11sp"
+        android:padding="5dp"
+        android:layout_marginTop="1dp"
+        android:textColor="#09A57B"
+
+        />
+    <ImageView
+        android:id="@+id/imgStar"
+        android:layout_width="25dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="33dp"
+        android:src="@drawable/star"
+        android:contentDescription="@string/reviews" />
+
+
+    <TextView
+        android:id="@+id/txtBookRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="24dp"
+        android:text="4.5"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:textColor="#FFC107" />
 </RelativeLayout>
