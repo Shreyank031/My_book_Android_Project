@@ -1,15 +1,17 @@
 package com.shrey.my_book.adapter
-
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.shrey.my_book.R
 import com.shrey.my_book.model.Book
 
-class MyAdapter(val itemList: ArrayList<Book>) : RecyclerView.Adapter<MyViewHolder>() {
+class MyAdapter(val context: Context,val itemList: ArrayList<Book>) : RecyclerView.Adapter<MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val infaltor = LayoutInflater.from(parent.context)
         val view = infaltor.inflate(R.layout.recycler_dashboard_single_row_for_view, parent, false)
@@ -27,6 +29,10 @@ class MyAdapter(val itemList: ArrayList<Book>) : RecyclerView.Adapter<MyViewHold
         holder.txtBookRatings.text = itemList[position].bookRatings
         holder.txtBookPrice.text = itemList[position].bookCost
         holder.imgBookImage.setImageResource(itemList[position].bookImage)
+        holder.RelativeLayout.setOnClickListener {
+            Toast.makeText(context, "Clicked on ${holder.txtBookName.text}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(holder.itemView.context, "Clicked on ${holder.txtBookName.text}", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
@@ -38,6 +44,7 @@ class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var txtBookRatings: TextView = itemView.findViewById(R.id.txtBookRating)
     var txtBookPrice: TextView = itemView.findViewById(R.id.txtBookPrice)
     var imgBookImage: ImageView = itemView.findViewById(R.id.imgAndy)
+    var RelativeLayout: RelativeLayout = itemView.findViewById(R.id.RelLayout)
 
 }
 

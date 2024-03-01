@@ -23,6 +23,13 @@
         android:padding="10dp"
         android:layout_margin="5dp"
         />
-
+    <Button
+        android:id="@+id/btnInt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:text="@string/check_internet"
+        android:background="@color/colorPrimary"/>
 
 </RelativeLayout>
